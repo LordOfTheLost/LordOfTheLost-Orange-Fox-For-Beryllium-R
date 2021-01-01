@@ -1,6 +1,6 @@
 # configure some default settings for the build
 FDEVICE="beryllium"
-VOF="$( date +"%d.%m" ).20-(2)"
+VOF="$( date +"%d.%m" ).21-(3)"
 tar -xf device/xiaomi/$FDEVICE/prebuilt/Image.tar.xz -C device/xiaomi/$FDEVICE/prebuilt; rm -f device/xiaomi/$FDEVICE/prebuilt/Image.tar.xz
 Default_Settings() {
 # Other Settings
