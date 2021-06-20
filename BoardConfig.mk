@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/xiaomi/beryllium
+LOCAL_PATH := device/beryllium
 
 # For building with minimal manifest
 # ALLOW_MISSING_DEPENDENCIES := true
@@ -33,8 +33,8 @@ TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
-# TARGET_BOARD_SUFFIX := _64
-# TARGET_USES_64_BIT_BINDER := true
+TARGET_BOARD_SUFFIX := _64
+TARGET_USES_64_BIT_BINDER := true
 
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
@@ -45,7 +45,8 @@ TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
 # lzma
-# LZMA_RAMDISK_TARGETS := recovery
+LZMA_RAMDISK_TARGETS := boot,recovery
+BOARD_NEEDS_LZMA_MINIGZIP := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0xA84000 androidboot.hardware=qcom androidboot.console=ttyMSM0 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 service_locator.enable=1 swiotlb=2048 androidboot.configfs=true androidboot.usbcontroller=a600000.dwc3 androidboot.selinux=permissive
@@ -74,20 +75,17 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 121425080320
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
 
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
-
 # Workaround for error copying vendor files to recovery ramdisk
 TARGET_COPY_OUT_VENDOR := vendor
 
 # Recovery
 TARGET_OTA_ASSERT_DEVICE := beryllium
-BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_HAS_NO_SELECT_BUTTON := true
+# BOARD_HAS_LARGE_FILESYSTEM := true
+# BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Android Verified Boot
-BOARD_AVB_ENABLE := false
-BOARD_BUILD_DISABLED_VBMETAIMAGE := true
+# BOARD_AVB_ENABLE := false
+# BOARD_BUILD_DISABLED_VBMETAIMAGE := true
 
 # TWRP specific build flags
 TW_THEME := portrait_hdpi
@@ -97,24 +95,22 @@ TARGET_RECOVERY_QCOM_RTC_FIX := true
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_DEFAULT_BRIGHTNESS := 420
-TW_DEFAULT_LANGUAGE := en
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_EXTRA_LANGUAGES := true
-TW_INCLUDE_NTFS_3G := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_MAX_BRIGHTNESS := 1023
-PLATFORM_SECURITY_PATCH := 2099-12-31
+# TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_EXTRA_LANGUAGES := false
+# TW_INCLUDE_NTFS_3G := true
+TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
-AB_OTA_UPDATER := false
+# AB_OTA_UPDATER := false
 TW_USE_QCOM_HAPTICS_VIBRATOR := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_USE_TOOLBOX := true
 
-# exFAT FS Support
-TW_INCLUDE_FUSE_EXFAT := true
-
-# NTFS Support
-TW_INCLUDE_FUSE_NTFS := true
+# File Systems
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+# TW_INCLUDE_FUSE_NTFS := true
+# TW_INCLUDE_FUSE_EXFAT := true
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
