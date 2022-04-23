@@ -1,13 +1,11 @@
 #
-# Copyright 2021 The Android Open Source Project
-#
-# Copyright (C) 2019-2021 OrangeFox Recovery Project
+# Copyright (C) 2022 The OrangeFox Recovery Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,9 +16,6 @@
 
 DEVICE_CODE := beryllium
 LOCAL_PATH := device/$(DEVICE_CODE)
-
-# For building with minimal manifest
-# ALLOW_MISSING_DEPENDENCIES := true
 
 # Architecture
 TARGET_ARCH := arm64
@@ -50,8 +45,7 @@ LZMA_RAMDISK_TARGETS := boot,recovery
 BOARD_NEEDS_LZMA_MINIGZIP := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0xA84000 androidboot.hardware=qcom androidboot.console=ttyMSM0 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 service_locator.enable=1 swiotlb=2048 androidboot.configfs=true androidboot.usbcontroller=a600000.dwc3 androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += 
+BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0xA84000 androidboot.hardware=qcom androidboot.console=ttyMSM0 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 service_locator.enable=1 swiotlb=2048 androidboot.configfs=true androidboot.usbcontroller=a600000.dwc3 androidboot.selinux=permissive androidboot.usbconfigfs=trueBOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -64,18 +58,18 @@ TARGET_KERNEL_ARCH := arm64
 # Platform
 TARGET_BOARD_PLATFORM := sdm845
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno630
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
+# TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_PERSISTIMAGE_PARTITION_SIZE := 67108864
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
+BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 121425080320
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 57453555712
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
+BOARD_VENDORIMAGE_PARTITION_SIZE := 788529152
 
 # Workaround for error copying vendor files to recovery ramdisk
 TARGET_COPY_OUT_VENDOR := vendor
@@ -86,7 +80,12 @@ TARGET_OTA_ASSERT_DEVICE := $(DEVICE_CODE)
 # BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Android Verified Boot
-# BOARD_AVB_ENABLE := false
+BOARD_AVB_ENABLE := true
+BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
+BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
 # BOARD_BUILD_DISABLED_VBMETAIMAGE := true
 
 # TWRP specific build flags
@@ -120,11 +119,11 @@ TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE := true
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
+# TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
 
 # System as root
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-BOARD_SUPPRESS_SECURE_ERASE := true
+# BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+# BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Extras
 TW_IGNORE_MISC_WIPE_DATA := true
