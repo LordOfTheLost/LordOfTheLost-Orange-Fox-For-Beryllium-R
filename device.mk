@@ -47,7 +47,7 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES := \
 	$(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/libdisplayconfig.qti.so
 
 PRODUCT_COPY_FILES += \
-	$(OUT_DIR)/target/product/dipper/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libandroidicu.so
+	$(OUT_DIR)/target/product/beryllium/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libandroidicu.so
 
 # FDE [Not Supported]
 TARGET_HW_DISK_ENCRYPTION := true
@@ -64,5 +64,5 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
 	$(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend@1.0.so
 
 PRODUCT_COPY_FILES += \
-	$(OUT_DIR)/target/product/dipper/obj/SHARED_LIBRARIES/libcryptfs_hw_intermediates/libcryptfs_hw.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libcryptfs_hw.so
+	$(OUT_DIR)/target/product/beryllium/obj/SHARED_LIBRARIES/libcryptfs_hw_intermediates/libcryptfs_hw.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libcryptfs_hw.so
 endif
